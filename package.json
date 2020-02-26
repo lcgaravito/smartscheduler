@@ -12,5 +12,23 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1"
-  }
+  },
+  "main": "app.js",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "prettier": "1.19.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpcorreap/smartscheduler.git"
+  },
+  "keywords": [],
+  "author": "Juan sebastian Vaca, Juan pablo correa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jpcorreap/smartscheduler/issues"
+  },
+  "homepage": "https://github.com/jpcorreap/smartscheduler#readme",
+  "description": ""
 }
