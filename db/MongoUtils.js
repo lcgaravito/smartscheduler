@@ -1,5 +1,19 @@
 const MongoClient = require("mongodb").MongoClient;
-const MongoUtils = function() {
+
+function MongoUtils() {
+  const mu = {},
+    hostname = "",
+    port = 27017,
+    dbName = "",
+    conName = "";
+
+  mu.connect = () => {
+    const client = new MongoClient( `mongodb://${hostname}:${port}`, {
+      useUnifiedTopology: true
+    });
+    return client.connect();
+  };
+
   // replace the uri string with your connection string.
   const uri = MongoClient.connect(uri, function(err, client) {
     if (err) {
@@ -14,6 +28,6 @@ const MongoUtils = function() {
 
     client.close();
   });
-};
+}
 
 module.exports = MongoUtils;
