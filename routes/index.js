@@ -17,5 +17,30 @@ router.get("/", function(req, res)
     
 });
 
+router.get("/login", function(req, res) 
+{
+  console.log("asdasd");
+  res.render("login");  
+});
+
+router.post("/login", function(req, res) 
+{
+  console.log("asdasd");
+  res.render("register");  
+});
+
+
+
+router.get("/register", function(req, res) 
+{
+  console.log("asdasd");
+  res.render("register");  
+});
+
+router.post("/register", function(req, res) 
+{
+  req.body.name
+});
+
 
 module.exports = router;
