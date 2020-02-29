@@ -2,8 +2,8 @@ const MongoClient = require("mongodb").MongoClient;
 
 function MongoUtils() {
   const mu = {},
-    user = "";//process.env.USER,
-    password = "";//process.env.PASSWORD,
+    user = "vaca";//process.env.USER,
+    password = "vaca123";//process.env.PASSWORD,
     dbName = "smartSchedule",
     colName = "schedules";
 
@@ -14,8 +14,10 @@ function MongoUtils() {
     return client.connect();
   };
 
+  // All of processes related to schedules
   mu.schedules={};
 
+  // Find items in schedules collection
   mu.schedules.find = query =>
     mu.connect().then(client => {
       console.log("Entró al find de MongoUtils")
@@ -28,16 +30,34 @@ function MongoUtils() {
         .finally(() => client.close());
     });
 
-  mu.schedules.insertSchedule = query =>
+  // Find schedule by one user
+  mu.schedules.findByOneUser = user =>
+    mu.connect().then(client => {
+      const schedule = client.db(dbName).collection(colName);
+
+      // when searching by id we need to create an ObjectID
+      return schedule
+        .findOne({ user: new ObjectID(user) })
+        .finally(() => client.close());
+    });
+
+  // Create one empty schedule    
+  mu.schedules.create = name =>
   mu.connect().then(client => {
-    console.log("Entró al find de MongoUtils")
+    console.log("MongoUtils:Entró al create vacío de MongoUtils, con el usuario ", name);
     const schedulesCol = client.db(dbName).collection(colName);
+    const emptySchedule = {"Mo":[],"Tu":[],"We":[],"Th":[],"Fr":[],"Sa":[],"Su":[] };
     return schedulesCol 
-      .find(query)
-      .sort({ timestap: -1 })
-      .toArray()
+      .insertOne( { user:name, schedule:emptySchedule } )
       .finally(() => client.close());
   });
+
+  mu.schedules.insert = grade =>
+    mu.connect().then(client => {
+      const gradesCol = client.db(dbName).collection(colName);
+
+      return gradesCol.insertOne(grade).finally(() => client.close());
+    });
 
   return mu;
 }

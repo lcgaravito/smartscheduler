@@ -43,7 +43,30 @@
 </div>
 
 
- 
+<h5>Create an empty schedule for an user:</h5>
+<form action="/schedules/create" method="POST">
+  <div class="form-group">
+    <label for="exampleInputEmail1">User</label>
+    <input type="name" name="user" class="form-control" aria-describedby="emailHelp" placeholder="Enter user">
+    <small id="emailHelp" class="form-text text-muted">Username</small>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+<h5>Show schedule of a specific user:</h5>
+<form action="">
+  <div class="form-group">
+    <label for="exampleInputEmail1">User:</label>
+    <input type="name" name="user" class="form-control" aria-describedby="emailHelp" placeholder="Enter name">
+    <small id="emailHelp" class="form-text text-muted">Username.</small>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
  <script src="./scripts/main.js"></script>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

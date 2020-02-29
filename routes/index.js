@@ -48,16 +48,7 @@ router.get("/", function(req, res) {
   });
 });
 
-router.get("/testdb", function(req, res) {
-  console.log("Entró a testdb");
-  console.log(bd.schedules.find({}));
-  bd.schedules.find({})
-    .then(data=> {
-      console.log(data);
-    });
-  res.render("<h1>¿Sirvió?</h1>");
-});
-
+// Passport data endpoints
 router.get("/login", function(req, res) {
   console.log("asdasd");
   res.render("login");
@@ -76,6 +67,27 @@ router.get("/register", function(req, res) {
 router.post("/register", function(req, res) {
   console.log("asdasd");
   res.render("register");
+});
+
+
+// Data endpoints
+
+// Get all schedules
+router.get("/schedules", function(req, res) {
+  console.log(bd.schedules.find({}));
+  bd.schedules.find({})
+    .then(schedules=>{
+      console.log(schedules);
+      return schedules;
+  })
+    .then( schedules => res.send(schedules) );
+});
+
+// Get schedule of an especific user
+router.post("/schedules/create", (req, res) => {
+  console.log("Llegó a create con los parámetros: ", req.body);
+  console.log("Se le va a mandar a create el usuario", req.body.user );
+  bd.schedules.create(req.body.user).then(res.redirect("/"));
 });
 
 module.exports = router;
