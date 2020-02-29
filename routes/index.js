@@ -39,22 +39,23 @@ router.get("/", function(req, res) {
       "19:00",
       "19:30",
       "20:30",
-      "20:00"
+      "20:00",
+      "20:30",
+      "21:00",
+      "21:30",
+      "22:00"
     ]
   });
 });
 
 router.get("/testdb", function(req, res) {
-  console.log("asdasd");
-  res.render("index", { title: "Express" });
-  bd.connect().then(cliente => {
-    console.log("cliente: ", cliente);
-
-    const a = cliente.bd("smartScheduler");
-    a.collection("schedules")
-      .insertOne({ name: "Juan Pablo" })
-      .then(result => console.log("listo", result));
-  });
+  console.log("Entró a testdb");
+  console.log(bd.schedules.find({}));
+  bd.schedules.find({})
+    .then(data=> {
+      console.log(data);
+    });
+  res.render("<h1>¿Sirvió?</h1>");
 });
 
 router.get("/login", function(req, res) {

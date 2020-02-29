@@ -13,39 +13,28 @@
 <h1><%= title %></h1>
 
 <div class="row">
-  <div class="col-sm-1">
+  <div class="col-sm-2">
     <form action="">
         <div class="form-group">
-          <label for="exampleFormControlSelect2">Hora inicial</label>
-      <div class="col-sm-1">
-    <form action="">
-        <div class="form-group">
-          <label for="exampleFormControlSelect2">Hora inicial</label>
-          <select multiple class="form-control" id="exampleFormControlSelect2">
-
+          <label>Hora inicial</label>
+          <select multiple class="form-control" id="controlSelect">
           <% hours.forEach( (item) => { %>
-          <option onclick="updateTimeI()"> <%= item %> </option>
+          <option><%= item %></option>
           <% }) %>
-          })
-
           </select>
         </div>
-      </form>
-    <button class="btn btn-primary" onclick="main()">Ensayar</button>
-  </div>
+    </form>
   </div>
   <div class="col-sm-1"></div>
-  <div class="col-sm-1">
+  <div class="col-sm-2">
     <form action="">
         <div class="form-group">
           <label for="exampleFormControlSelect2">Hora final</label>
           <select multiple class="form-control" id="exampleFormControlSelect2">
-
           <% hours.forEach( (item) => { %>
-          <option onclick="updateTimeF()"> <%= item %> </option>
+          <option> <%= item %> </option>
           <% }) %>
           })
-
           </select>
         </div>
       </form>
