@@ -92,8 +92,8 @@ router.post("/schedules/create", (req, res) => {
 
 // Create empty schedule of an especific user
 router.post("/schedules/addBusyHour", (req, res) => {
-  console.log("Llegó a addBusyHour con los parámetros: ", req.body);
-  bd.schedules.addBusyHour(req.body.user).then(res.redirect("/"));
+  console.log("ROUTES/INDEX.JS Llegó a addBusyHour con los parámetros: ", req.body);
+  bd.schedules.addBusyHour(req.body).then(res.redirect("/"));
 });
 
 

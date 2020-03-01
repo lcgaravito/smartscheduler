@@ -55,8 +55,13 @@ function MongoUtils() {
   // Create one empty schedule    
   mu.schedules.addBusyHour = body =>
   mu.connect().then(client => {
-    console.log("MongoUtils:Entró al addBusyHour de MongoUtils, con el BODY ", body);
+    console.log("MongoUtils: Entró al addBusyHour, con el BODY ", body);
     const schedulesCol = client.db(dbName).collection(colName);
+    schedulesCol.find(); //PENDIENTE
+    const startArray = body.start.split(":");
+    const startNumber = parseInt(startArray[0])-4+(parseInt(startArray[1])/30);
+    const endArray = body.end.split(":");
+    const endNumber = parseInt(endArray[0])-4+(parseInt(endArray[1])/30);
     const emptySchedule = {"Mon":[],"Tue":[],"Wed":[],"Thu":[],"Fri":[],"Sat":[],"Sun":[] };
     return schedulesCol 
       .insertOne( { user:body, schedule:emptySchedule } )
