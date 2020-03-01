@@ -11,37 +11,13 @@
 </head>
 <body>
 <h1><%= title %></h1>
+<h4>At this moment, you can:</h4>
+<br />
 
-<div class="row">
-  <div class="col-sm-2">
-    <form action="">
-        <div class="form-group">
-          <label>Hora inicial</label>
-          <select multiple class="form-control" id="controlSelect">
-          <% hours.forEach( (item) => { %>
-          <option><%= item %></option>
-          <% }) %>
-          </select>
-        </div>
-    </form>
-  </div>
-  <div class="col-sm-1"></div>
-  <div class="col-sm-2">
-    <form action="">
-        <div class="form-group">
-          <label for="exampleFormControlSelect2">Hora final</label>
-          <select multiple class="form-control" id="exampleFormControlSelect2">
-          <% hours.forEach( (item) => { %>
-          <option> <%= item %> </option>
-          <% }) %>
-          })
-          </select>
-        </div>
-      </form>
-    <button class="btn btn-primary" onclick="main()">Ensayar</button>
-  </div>
+<h5>Add a bussy hour for an specific user:</h5>
+<div class="container">
+  <%- include("./form_hour.ejs") %>
 </div>
-
 
 <h5>Create an empty schedule for an user:</h5>
 <form action="/schedules/create" method="POST">

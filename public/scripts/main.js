@@ -1,4 +1,4 @@
-alert("Holi");
+//alert("Holi");
 
 const blocks = {
   1: "5:00-5:30",
@@ -74,3 +74,21 @@ const findSchedule = list => {
 const main = () => {
   findSchedule(JSON);
 };
+
+function updateStartHour( ) {
+  const selected_option = $('#controlSelectS').val()[0];
+  console.log( "Seleccionó la start hour: ", selected_option );
+  alert("Hora de inicio: " + selected_option);
+}
+
+function updateEndHour( ) {
+  const selected_option = $('#controlSelectE').val()[0];
+  console.log( "Seleccionó la end hour: ", selected_option );
+  alert("Hora de fin: " + selected_option);
+}
+
+function updateDay( ) {
+  const selected_option = $('#controlSelectDay').val()[0];
+  console.log( "Seleccionó el día: ", selected_option );
+  alert("Día: " + selected_option);
+}
