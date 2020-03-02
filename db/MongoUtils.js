@@ -81,23 +81,20 @@ function MongoUtils() {
     mu.connect().then(client => {
       console.log("MongoUtils: Entró al addBusyHour, con el BODY ", body);
       const schedulesCol = client.db(dbName).collection(colName);
-      schedulesCol.find(); //PENDIENTE
+      const usuario = schedulesCol.find( { "user": body.user } ); //PENDIENTE
       const startArray = body.start.split(":");
-      const startNumber =
-        parseInt(startArray[0]) - 4 + parseInt(startArray[1]) / 30;
+      const startNumber = parseInt(startArray[0]) - 4 + parseInt(startArray[1]) / 30;
       const endArray = body.end.split(":");
       const endNumber = parseInt(endArray[0]) - 4 + parseInt(endArray[1]) / 30;
-      const emptySchedule = {
-        Mon: [],
-        Tue: [],
-        Wed: [],
-        Thu: [],
-        Fri: [],
-        Sat: [],
-        Sun: []
-      };
+      console.log("Deberia meter al arreglo los valores desde el ", startNumber, " hasta el ", endNumber );
+  
       return schedulesCol
-        .insertOne({ user: body, schedule: emptySchedule })
+        .updateOne(
+          { "user":body.user, "day":"Tue" },
+          { $push: {
+              schedule: { $each: [1,2,3,4,5] } 
+          }  
+        })
         .finally(() => client.close());
     });
 
