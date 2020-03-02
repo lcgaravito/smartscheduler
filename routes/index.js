@@ -73,14 +73,13 @@ router.post("/register", function(req, res) {
 
 // Get all schedules
 router.get("/schedules", function(req, res) {
-  console.log(bd.schedules.find({}));
+  
   bd.schedules
     .find({})
     .then(schedules => {
       console.log(schedules);
-      return schedules;
+      res.send(schedules);
     })
-    .then(schedules => res.send(schedules));
 });
 
 // Create empty schedule of an especific user

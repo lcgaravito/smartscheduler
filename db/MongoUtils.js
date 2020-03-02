@@ -62,17 +62,14 @@ function MongoUtils() {
         name
       );
       const schedulesCol = client.db(dbName).collection(colName);
-      const emptySchedule = {
-        Mo: [],
-        Tu: [],
-        We: [],
-        Th: [],
-        Fr: [],
-        Sa: [],
-        Su: []
-      };
       return schedulesCol
-        .insertOne({ user: name, schedule: emptySchedule })
+        .insertMany( [ { user: name, day:"Mon", schedule: [] },
+        { user: name, day:"Tue", schedule: [] },
+        { user: name, day:"Wed", schedule: [] },
+        { user: name, day:"Thu", schedule: [] },
+        { user: name, day:"Fri", schedule: [] },
+        { user: name, day:"Sat", schedule: [] },
+        { user: name, day:"Sun", schedule: [] } ] )
         .finally(() => client.close());
     });
 
@@ -81,7 +78,7 @@ function MongoUtils() {
     mu.connect().then(client => {
       console.log("MongoUtils: Entró al addBusyHour, con el BODY ", body);
       const schedulesCol = client.db(dbName).collection(colName);
-      const usuario = schedulesCol.find({ user: body.user }); //PENDIENTE
+      const usuario = schedulesCol.find({ user: body.user });
       const startArray = body.start.split(":");
       const startNumber =
         parseInt(startArray[0]) - 4 + parseInt(startArray[1]) / 30;
@@ -94,12 +91,20 @@ function MongoUtils() {
         endNumber
       );
 
+      const arreglo = [];
+      for (let i = startNumber; i <= endNumber; i++) {
+        arreglo.push(i);
+      }
+
+      const partido = body.day.split();
+      const dia = partido[0] + partido[1] + partido[3];
+
       return schedulesCol
         .updateOne(
-          { user: body.user, day: "Tue" },
+          { user: body.user, day: dia },
           {
             $push: {
-              schedule: { $each: [1, 2, 3, 4, 5] }
+              schedule: { $each: [8, 9, 10] }
             }
           }
         )
