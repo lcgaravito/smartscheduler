@@ -1,4 +1,6 @@
-# Smart Schedules
+# Smart Scheduler
+
+
 
 ![img](https://raw.githubusercontent.com/jpcorreap/smartscheduler/master/SCREENSHOT.png)
 
