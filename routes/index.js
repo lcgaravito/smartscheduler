@@ -65,8 +65,8 @@ router.get("/register", function(req, res) {
 });
 
 router.post("/register", function(req, res) {
-  console.log("asdasd");
-  res.render("register");
+  console.log("se creo", req.body);
+  bd.auth.create(req.body).then(res.redirect("/"));
 });
 
 
