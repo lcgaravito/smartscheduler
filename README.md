@@ -1,6 +1,6 @@
 # Smart Schedules
 
-Screenshot
+![img](https://raw.githubusercontent.com/jpcorreap/smartscheduler/master/SCREENSHOT.png)
 
 * [Smart Schedules Website ](https://smart-schedules.herokuapp.com/)
 
