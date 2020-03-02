@@ -69,32 +69,34 @@ router.post("/register", function(req, res) {
   bd.auth.create(req.body).then(res.redirect("/"));
 });
 
-
 // Data endpoints
 
 // Get all schedules
 router.get("/schedules", function(req, res) {
   console.log(bd.schedules.find({}));
-  bd.schedules.find({})
-    .then(schedules=>{
+  bd.schedules
+    .find({})
+    .then(schedules => {
       console.log(schedules);
       return schedules;
-  })
-    .then( schedules => res.send(schedules) );
+    })
+    .then(schedules => res.send(schedules));
 });
 
 // Create empty schedule of an especific user
 router.post("/schedules/create", (req, res) => {
   console.log("Llegó a create con los parámetros: ", req.body);
-  console.log("Se le va a mandar a create el usuario", req.body.user );
+  console.log("Se le va a mandar a create el usuario", req.body.user);
   bd.schedules.create(req.body.user).then(res.redirect("/"));
 });
 
 // Create empty schedule of an especific user
 router.post("/schedules/addBusyHour", (req, res) => {
-  console.log("ROUTES/INDEX.JS Llegó a addBusyHour con los parámetros: ", req.body);
+  console.log(
+    "ROUTES/INDEX.JS Llegó a addBusyHour con los parámetros: ",
+    req.body
+  );
   bd.schedules.addBusyHour(req.body).then(res.redirect("/"));
 });
-
 
 module.exports = router;

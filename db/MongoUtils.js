@@ -21,7 +21,7 @@ function MongoUtils() {
   mu.auth = {};
 
   // Create one user
-  mu.auth.create = (body) =>
+  mu.auth.create = body =>
     mu.connect().then(client => {
       // console.log("MongoUtils:Entró al create vacío de MongoUtils, con el usuario ", name);
       const userCol = client.db(dbName).collection("auth");
@@ -81,20 +81,28 @@ function MongoUtils() {
     mu.connect().then(client => {
       console.log("MongoUtils: Entró al addBusyHour, con el BODY ", body);
       const schedulesCol = client.db(dbName).collection(colName);
-      const usuario = schedulesCol.find( { "user": body.user } ); //PENDIENTE
+      const usuario = schedulesCol.find({ user: body.user }); //PENDIENTE
       const startArray = body.start.split(":");
-      const startNumber = parseInt(startArray[0]) - 4 + parseInt(startArray[1]) / 30;
+      const startNumber =
+        parseInt(startArray[0]) - 4 + parseInt(startArray[1]) / 30;
       const endArray = body.end.split(":");
       const endNumber = parseInt(endArray[0]) - 4 + parseInt(endArray[1]) / 30;
-      console.log("Deberia meter al arreglo los valores desde el ", startNumber, " hasta el ", endNumber );
-  
+      console.log(
+        "Deberia meter al arreglo los valores desde el ",
+        startNumber,
+        " hasta el ",
+        endNumber
+      );
+
       return schedulesCol
         .updateOne(
-          { "user":body.user, "day":"Tue" },
-          { $push: {
-              schedule: { $each: [1,2,3,4,5] } 
-          }  
-        })
+          { user: body.user, day: "Tue" },
+          {
+            $push: {
+              schedule: { $each: [1, 2, 3, 4, 5] }
+            }
+          }
+        )
         .finally(() => client.close());
     });
 
