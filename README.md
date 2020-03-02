@@ -1,11 +1,11 @@
 # Smart Schedules
 
-aqui va una foto de la pagina cuando este lista
+Screenshot
 
 * [Smart Schedules Website ](https://smart-schedules.herokuapp.com/)
 
 ### Description
-This is a web platform that facilitates the search for free time spaces that students have in common. 
+This is a web platform that facilitates searching for free time spaces that students have in common. 
 This thinking that it is often difficult for us to find gaps in common for academic or recreational 
 activities. The idea is that the platform generates a report with the spaces in which the students 
 involved are available.
@@ -27,23 +27,25 @@ To complete the project in full compliance with the proposed objectives, we made
 - BOOTSTRAP
 - JAVASCRIPT
 - EXPRESS
-- NODE
+- NODE JS
 - PASSPORT
 - MONGO DB
 
-### How do you runt it
+### How run it?
 In order to run the project in its entirety and without errors, the following instructions must be taken into account:
-clonar el repositorio
-entrar al directorio
-npm install sobre la carpeta
-npm start sobre macco-accesorios para encender el back-end
-npm start sobre macco-accesorios/front
-
+- Open a command line.
+- Type git clone 
+- Open smartschedule's directory.
+- Run next commands:
+- npm install
+- npm install --save nodemon dotenv
+- npm install ejs dotenv passport passport-local express-session
+- Finally, to run local server with files, run: npm run devStart
 
 ### Authors
-
   * [Juan Sebastian Vaca Tibocha](https://github.com/sebastianvaca99)
   * [Juan Pablo Correa](https://github.com/jpcorreap)
+  
   
 ### License 
   
