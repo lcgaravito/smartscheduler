@@ -76,18 +76,19 @@ function MongoUtils() {
   // Create one empty schedule
   mu.schedules.addBusyHour = body =>
     mu.connect().then(client => {
-      console.log("MongoUtils: Entró al addBusyHour, con el BODY ", body);
+      console.log("MongoUtils: Entró a addBusyHour con el body ", body);
       const schedulesCol = client.db(dbName).collection(colName);
-      const usuario = schedulesCol.find({ user: body.user });
+      const usuario = schedulesCol.find({ user: body.user, day: body.day });
+      //console.log( "Se trajo de MongoDB el registro: ", usuario );
       const startArray = body.start.split(":");
       const startNumber =
         parseInt(startArray[0]) - 4 + parseInt(startArray[1]) / 30;
       const endArray = body.end.split(":");
       const endNumber = parseInt(endArray[0]) - 4 + parseInt(endArray[1]) / 30;
       console.log(
-        "Deberia meter al arreglo los valores desde el ",
+        "Va a meter busyHours desde ",
         startNumber,
-        " hasta el ",
+        " hasta ",
         endNumber
       );
 
@@ -96,15 +97,12 @@ function MongoUtils() {
         arreglo.push(i);
       }
 
-      const partido = body.day.split();
-      const dia = partido[0] + partido[1] + partido[3];
-
       return schedulesCol
         .updateOne(
-          { user: body.user, day: dia },
+          { user: body.user, day: body.day },
           {
             $push: {
-              schedule: { $each: [8, 9, 10] }
+              schedule: { $each: arreglo }
             }
           }
         )

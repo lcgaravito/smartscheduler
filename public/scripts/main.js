@@ -79,17 +79,17 @@ const main = () => {
 function updateStartHour( ) {
   const selected_option = $('#controlSelectS').val()[0];
   console.log( "Seleccionó la start hour: ", selected_option );
-  alert("SELECCIONÓ Hora de inicio: " + selected_option);
+  //alert("SELECCIONÓ Hora de inicio: " + selected_option);
 }
 
 function updateEndHour( ) {
   const selected_option = $('#controlSelectE').val()[0];
   console.log( "Seleccionó la end hour: ", selected_option );
-  alert("SELECCIONÓ Hora de fin: " + selected_option);
+  //alert("SELECCIONÓ Hora de fin: " + selected_option);
 }
 
 function updateDay( ) {
   const selected_option = $('#controlSelectDay').val()[0];
   console.log( "Seleccionó el día: ", selected_option );
-  alert("SELECCIONÓ Día: " + selected_option);
+  //alert("SELECCIONÓ Día: " + selected_option);
 }
