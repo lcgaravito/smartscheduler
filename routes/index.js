@@ -65,19 +65,18 @@ router.post("/register", function(req, res) {
 
 // Data endpoints
 
-router.get("/userSchedule", function(req, res) {
-  console.log("Entró a /userschedule con GET.");
-  console.log(req.body.user);
-  bd.schedules.findByOneUser(req.body.user).then(schedules => {
+// Get all schedules
+router.get("/schedules", function(req, res) {
+  bd.schedules.find( {} ).then(schedules => {
     console.log(schedules);
     res.send(schedules);
   });
 });
 
-// Get all schedules
-router.get("/schedules", function(req, res) {
-  console.log("Entró a /schedules con GET.");
-  bd.schedules.find({}).then(schedules => {
+// Get an specific schedule
+router.get("/schedules/:user", function(req, res) {
+  console.log("Entró a /schedules con GET.", req.params);
+  bd.schedules.find( req.params ).then(schedules => {
     console.log(schedules);
     res.send(schedules);
   });

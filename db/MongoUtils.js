@@ -33,7 +33,7 @@ function MongoUtils() {
   // Find items in schedules collection
   mu.schedules.find = query =>
     mu.connect().then(client => {
-      console.log("MONGOUTILS. Entró al schedules.find");
+      console.log("MONGOUTILS. Entró al schedules.find con el query ", query );
       const schedulesCol = client.db(dbName).collection(colName);
       return schedulesCol
         .find(query)

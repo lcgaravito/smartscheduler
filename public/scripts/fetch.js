@@ -1,11 +1,3 @@
-viewSchedules();
-
-function viewSchedules () {
-  fetch("schedules")
-    .then(req => req.json())
-    .then(data => render(data));
-}
-
 const stunde = [
   "5:00-5:30",
   "5:30-6:00",
@@ -43,54 +35,78 @@ const stunde = [
   "21:30-22:00" ];
 
 // Table which will display schedules information 
-const tbody = document.getElementById("schedules");
+const tbody = document.getElementById("schedulesBody");
+
+function cleanTbody() {
+  var child = tbody.lastElementChild;  
+    while (child) { 
+        tbody.removeChild(child); 
+        child = tbody.lastElementChild; 
+    } 
+}
 
 // Generates table elements for display information
-const render = registers => {
+const render = (registers, usuario) => {
   var i = 1;
-
+  cleanTbody();
+  document.getElementById("schedules").style.visibility = "visible";
   registers.forEach(register => {
     
     register.schedule.forEach( block => {
-      const startEndHours = stunde[block].split("-");
+      if( register.user === usuario ) {
+        const startEndHours = stunde[block].split("-");
 
-      // Creates row
-      const tr = document.createElement("tr");
-      
-      // Creates first column
-      const th = document.createElement("th");
-      th.scope = "row";
-      th.textContent = i;
+        // Creates row
+        const tr = document.createElement("tr");
+        
+        // Creates first column
+        const th = document.createElement("th");
+        th.scope = "row";
+        th.textContent = i;
 
-      // Creates second column
-      const td1 = document.createElement("td");
-      td1.textContent = register.day;
+        // Creates second column
+        const td1 = document.createElement("td");
+        td1.textContent = register.day;
 
-      // Creates third column
-      const td2 = document.createElement("td");
-      td2.textContent = startEndHours[0];
+        // Creates third column
+        const td2 = document.createElement("td");
+        td2.textContent = startEndHours[0];
 
-      // Creates third column
-      const td3 = document.createElement("td");
-      td3.textContent = startEndHours[1];
+        // Creates third column
+        const td3 = document.createElement("td");
+        td3.textContent = startEndHours[1];
 
-      // Creates fourth column
-      const a = document.createElement("a");
-      a.href="#";
-      a.textContent="Delete";
-      const td4 = document.createElement("td");
+        // Creates fourth column
+        const a = document.createElement("a");
+        a.href="#";
+        a.textContent="Delete";
+        const td4 = document.createElement("td");
 
-      // Appends all created objects
-      tr.appendChild(th);
-      tr.appendChild(td1);
-      tr.appendChild(td2);
-      tr.appendChild(td3);
-      td4.appendChild(a);
-      tr.appendChild(td4);
+        // Appends all created objects
+        tr.appendChild(th);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        td4.appendChild(a);
+        tr.appendChild(td4);
 
-      tbody.appendChild(tr);
+        tbody.appendChild(tr);
 
-      i++;
+        i++;
+      }
     })
   }
 )};
+
+function aux(){
+  viewUserHours();
+}
+
+
+function viewUserHours() {
+  const usuario = document.getElementById("viewUserHours").value;
+  console.log( "Entró a viewUserHours con el usuario ", usuario );
+  fetch("schedules")
+    .then(req => req.json())
+    .then(data => render(data, usuario));
+}

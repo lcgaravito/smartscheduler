@@ -4,8 +4,7 @@
   <div class="container" style="margin-top: 75px;">
 
   <div class="row">
-    <div class="img-container">
-      <img src="https://dl.dropboxusercontent.com/s/2zhoxj65isr23fz/img.png" alt="Logo of Smart Scheduler" width="250px">
+    <div class="col-md-3">
     </div>
     <div class="col-md-9">
       <br>
@@ -16,9 +15,22 @@
   
   <br />
   <br />
-  <h5><strong>(VACA, ESTO ESTÁ BOTANDO TODAS LAS BUSY HORAS DE LA BASE DE DATOS, HAY QUE HACER QUE FILTRE PARA UN USUARIO)</strong>Those are your busy hours: </h5>
+  <h5>To view your busy hours, please insert your user: </h5>
   <br>
+    <div class="form-group">
+      <input
+        type="name"
+        name="user"
+        class="form-control"
+        aria-describedby="emailHelp"
+        placeholder="Enter user"
+        id="viewUserHours"
+      />
+    </div>
+    <button class="btn btn-primary" onclick="aux();">View busy hours</button>
+
   <%- include("./view_schedule.ejs") %>
+
   <h5><strong>VACA:</strong> Borrar horas sirve desde MongoUtils, se llama removeBusyHour. Falta pensar en conectarlo con esta tabla, el profe generaba links dinámicamente en la tabla para ver los detalles de las notas.</h5>
   <br>
   <br>
