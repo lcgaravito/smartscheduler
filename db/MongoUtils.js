@@ -2,8 +2,8 @@ const MongoClient = require("mongodb").MongoClient;
 
 function MongoUtils() {
   const mu = {},
-    user = "vaca"; //process.env.USER,
-  password = "vaca123"; //process.env.PASSWORD,
+    user = process.env.USER,
+  password = process.env.PASSWORD;
   (dbName = "smartSchedule"), (colName = "schedules");
 
   mu.connect = () => {
