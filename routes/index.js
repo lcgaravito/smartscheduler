@@ -49,7 +49,7 @@ router.get("/", function(req, res) {
 // Passport data endpoints
 
 router.post("/login", function(req, res) {
-  console.log("Se logueó con el valor ", req.body.username );
+  console.log("Se logueó con el valor ", req.body.username);
   res.redirect("/");
 });
 
@@ -65,15 +65,22 @@ router.post("/register", function(req, res) {
 
 // Data endpoints
 
+router.get("/userSchedule", function(req, res) {
+  console.log("Entró a /userschedule con GET.");
+  console.log(req.body.user);
+  bd.schedules.findByOneUser(req.body.user).then(schedules => {
+    console.log(schedules);
+    res.send(schedules);
+  });
+});
+
 // Get all schedules
 router.get("/schedules", function(req, res) {
-  console.log("Entró a /schedules con GET." );
-  bd.schedules
-    .find({})
-    .then(schedules => {
-      console.log(schedules);
-      res.send(schedules);
-    })
+  console.log("Entró a /schedules con GET.");
+  bd.schedules.find({}).then(schedules => {
+    console.log(schedules);
+    res.send(schedules);
+  });
 });
 
 // Create empty schedule of an especific user

@@ -2,8 +2,8 @@ const MongoClient = require("mongodb").MongoClient;
 
 function MongoUtils() {
   const mu = {},
-    user = "vaca",//process.env.USER,
-  password = "vaca123";//process.env.PASSWORD;
+    user = "vaca", //process.env.USER,
+    password = "vaca123"; //process.env.PASSWORD;
   (dbName = "smartSchedule"), (colName = "schedules");
 
   mu.connect = () => {
@@ -62,13 +62,15 @@ function MongoUtils() {
       );
       const schedulesCol = client.db(dbName).collection(colName);
       return schedulesCol
-        .insertMany( [ { user: name, day:"Mon", schedule: [] },
-        { user: name, day:"Tue", schedule: [] },
-        { user: name, day:"Wed", schedule: [] },
-        { user: name, day:"Thu", schedule: [] },
-        { user: name, day:"Fri", schedule: [] },
-        { user: name, day:"Sat", schedule: [] },
-        { user: name, day:"Sun", schedule: [] } ] )
+        .insertMany([
+          { user: name, day: "Mon", schedule: [] },
+          { user: name, day: "Tue", schedule: [] },
+          { user: name, day: "Wed", schedule: [] },
+          { user: name, day: "Thu", schedule: [] },
+          { user: name, day: "Fri", schedule: [] },
+          { user: name, day: "Sat", schedule: [] },
+          { user: name, day: "Sun", schedule: [] }
+        ])
         .finally(() => client.close());
     });
 
@@ -108,18 +110,20 @@ function MongoUtils() {
         .finally(() => client.close());
     });
 
-    // Add one (or many) busy hours
+  // Add one (or many) busy hours
   mu.schedules.removeBusyHour = body =>
     mu.connect().then(client => {
       console.log("MongoUtils: Entró a removeBusyHour con el body ", body);
       const schedulesCol = client.db(dbName).collection(colName);
       const usuario = schedulesCol.find({ user: body.user, day: body.day });
       const startArray = body.start.split(":");
-      const number =
-        parseInt(startArray[0]) - 5 + parseInt(startArray[1]) / 30;
-      
+      const number = parseInt(startArray[0]) - 5 + parseInt(startArray[1]) / 30;
+
       console.log(
-        "Va a remover de busyHours de ", body.user, body.day, " el número ",
+        "Va a remover de busyHours de ",
+        body.user,
+        body.day,
+        " el número ",
         number
       );
 
@@ -128,7 +132,7 @@ function MongoUtils() {
           { user: body.user, day: body.day },
           {
             $pull: {
-              schedule: { $in: [ number ] }
+              schedule: { $in: [number] }
             }
           }
         )
