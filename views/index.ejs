@@ -58,8 +58,25 @@
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+  
 
-    <div id="schedules" class="schedules"></div>
+    
+    <div class="container col-md-7">
+      <h3>My schedule:</h3>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Day</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+            <th scope="col">Option</th>
+          </tr>
+        </thead>
+        <tbody id="schedules">
+        </tbody>
+      </table>
+     </div>
 
     <script src="./scripts/main.js"></script>
     <script src="./scripts/fetch.js"></script>

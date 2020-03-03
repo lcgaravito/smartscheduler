@@ -2,8 +2,8 @@ const MongoClient = require("mongodb").MongoClient;
 
 function MongoUtils() {
   const mu = {},
-    user = process.env.USER,
-  password = process.env.PASSWORD;
+    user = "vaca",//process.env.USER,
+  password = "vaca123";//process.env.PASSWORD;
   (dbName = "smartSchedule"), (colName = "schedules");
 
   mu.connect = () => {
@@ -33,12 +33,11 @@ function MongoUtils() {
   // Find items in schedules collection
   mu.schedules.find = query =>
     mu.connect().then(client => {
-      console.log("Entró al find de MongoUtils");
+      console.log("MONGOUTILS. Entró al schedules.find");
       const schedulesCol = client.db(dbName).collection(colName);
       return schedulesCol
         .find(query)
-        .limit(20)
-        .sort({ timestap: -1 })
+        .sort({ day: 1 })
         .toArray()
         .finally(() => client.close());
     });
@@ -73,7 +72,7 @@ function MongoUtils() {
         .finally(() => client.close());
     });
 
-  // Create one empty schedule
+  // Add one (or many) busy hours
   mu.schedules.addBusyHour = body =>
     mu.connect().then(client => {
       console.log("MongoUtils: Entró a addBusyHour con el body ", body);
@@ -82,9 +81,9 @@ function MongoUtils() {
       //console.log( "Se trajo de MongoDB el registro: ", usuario );
       const startArray = body.start.split(":");
       const startNumber =
-        parseInt(startArray[0]) - 4 + parseInt(startArray[1]) / 30;
+        parseInt(startArray[0]) - 5 + parseInt(startArray[1]) / 30;
       const endArray = body.end.split(":");
-      const endNumber = parseInt(endArray[0]) - 4 + parseInt(endArray[1]) / 30;
+      const endNumber = parseInt(endArray[0]) - 5 + parseInt(endArray[1]) / 30;
       console.log(
         "Va a meter busyHours desde ",
         startNumber,
@@ -109,11 +108,31 @@ function MongoUtils() {
         .finally(() => client.close());
     });
 
-  mu.schedules.insert = grade =>
+    // Add one (or many) busy hours
+  mu.schedules.removeBusyHour = body =>
     mu.connect().then(client => {
-      const gradesCol = client.db(dbName).collection(colName);
+      console.log("MongoUtils: Entró a removeBusyHour con el body ", body);
+      const schedulesCol = client.db(dbName).collection(colName);
+      const usuario = schedulesCol.find({ user: body.user, day: body.day });
+      const startArray = body.start.split(":");
+      const number =
+        parseInt(startArray[0]) - 5 + parseInt(startArray[1]) / 30;
+      
+      console.log(
+        "Va a remover de busyHours de ", body.user, body.day, " el número ",
+        number
+      );
 
-      return gradesCol.insertOne(grade).finally(() => client.close());
+      return schedulesCol
+        .updateOne(
+          { user: body.user, day: body.day },
+          {
+            $pull: {
+              schedule: { $in: [ number ] }
+            }
+          }
+        )
+        .finally(() => client.close());
     });
 
   return mu;
