@@ -1,7 +1,7 @@
 <form action="/schedules/addBusyHour" method="POST" class="form-group" id="formBusyHour">
-<div class="row d-flex p-2">
-    <div class="form-group" class="col-sm-3">
-      <label>Day:</label>
+<div class="row">
+    <div class="form-group" class="col-sm-3" >
+          <label>Day:</label>
           <select onclick="updateDay()" id="controlSelectDay" name="day" multiple class="form-control" >
           <option value="Mon">Mon</option>
           <option value="Tue">Tue</option>
@@ -13,7 +13,7 @@
           </select>
     </div>
     <div class="form-group" class="col-sm-3">
-      <label>Start hour:</label>
+      <label>Start:</label>
       <select onclick="updateStartHour()" id="controlSelectS" name="start" multiple class="form-control" >
       <% hours.forEach( (item) => { %>
       <option value=<%- "'" + item + "'" %>> <%= item %></option>
@@ -21,7 +21,7 @@
       </select>
     </div>
     <div class="form-group" class="col-sm-3">
-      <label>End hour:</label>
+      <label>End:</label>
       <select onclick="updateEndHour()" id="controlSelectE" name="end" multiple class="form-control" >
       <% hours.forEach( (item) => { %>
       <option><%= item %></option>
@@ -31,7 +31,7 @@
     </div>
 </div>
 <div class="row">
-    <input type="name" name="user" class="form-control" aria-describedby="emailHelp" placeholder="Which user">
+    <input type="name" name="user" class="form-control" aria-describedby="emailHelp" placeholder="Enter user">
 </div>
 <div class="row" style="margin-top: 20px">
     <button type="submit" class="btn btn-primary">Submit</button>
