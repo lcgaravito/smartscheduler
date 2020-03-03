@@ -4,7 +4,6 @@ const bd = require("../db/MongoUtils.js");
 
 /* GET home page. */
 router.get("/", function(req, res) {
-  console.log("Llegó hasta aquí.");
   res.render("index", {
     title: "Smart Scheduler",
     hours: [
@@ -48,14 +47,10 @@ router.get("/", function(req, res) {
 });
 
 // Passport data endpoints
-router.get("/login", function(req, res) {
-  console.log("asdasd");
-  res.render("login");
-});
 
 router.post("/login", function(req, res) {
-  console.log("asdasd");
-  res.render("register");
+  console.log("Se logueó con el valor ", req.body.username );
+  res.redirect("/");
 });
 
 router.get("/register", function(req, res) {
@@ -72,6 +67,7 @@ router.post("/register", function(req, res) {
 
 // Get all schedules
 router.get("/schedules", function(req, res) {
+  console.log("Entró a /schedules con GET." );
   bd.schedules
     .find({})
     .then(schedules => {
@@ -93,7 +89,7 @@ router.post("/schedules/addBusyHour", (req, res) => {
     "ROUTES/INDEX.JS Llegó a addBusyHour con los parámetros: ",
     req.body
   );
-  bd.schedules.removeBusyHour(req.body).then(res.redirect("/"));
+  bd.schedules.addBusyHour(req.body).then(res.redirect("/"));
 });
 
 module.exports = router;
